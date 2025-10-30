@@ -4,7 +4,7 @@ export default function App() {
   // Define la fecha objetivo: hoy a las 5:00 p. m. hora local del navegador
   const target = useMemo(() => {
     const d = new Date();
-    d.setHours(17, 0, 0, 0); // 17:00:00 hoy
+    d.setHours(19, 0, 0, 0); // 19:00:00 hoy
     return d;
   }, []);
 
@@ -29,15 +29,19 @@ export default function App() {
         {/* Card */}
         <div className="relative overflow-hidden rounded-2xl border border-slate-800 bg-slate-900/40 shadow-2xl backdrop-blur">
           {/* Header */}
-          <div className="p-6 sm:p-10 border-b border-slate-800">
-            {/* <h1 className="text-2xl sm:text-3xl font-semibold tracking-tight">
-              Para ti ♥
-            </h1> */}
-            <p className="text-slate-400 mt-1 text-sm">
-              Este mensaje se desbloquea hoy a las <span className="font-medium text-slate-200">5:00 p. m.</span>
-            </p>
-          </div>
-
+           {
+              !isUnlocked && 
+                <div className="p-6 sm:p-10 border-b border-slate-800">
+                  {/* <h1 className="text-2xl sm:text-3xl font-semibold tracking-tight">
+                    Para ti ♥
+                  </h1> */}
+                
+                    <p className="text-slate-400 mt-1 text-sm">
+                      Este mensaje se desbloquea hoy a las <span className="font-medium text-slate-200">7:00 p. m.</span>
+                    </p>
+                  
+                </div>
+          }
           {/* Body */}
           <div className="p-6 sm:p-10">
             {!isUnlocked ? (
@@ -49,13 +53,16 @@ export default function App() {
           </div>
 
           {/* Footer */}
-          <div className="px-6 sm:px-10 pb-6 sm:pb-10">
-            <div className="flex flex-col sm:flex-row gap-3 sm:items-center sm:justify-between">
-              <p className="text-xs text-slate-400">
-                Si no ves el contenido a las 5:00 p. m., actualiza la página.
-              </p>
-            </div>
-          </div>
+          {
+            !isUnlocked && 
+              <div className="px-6 sm:px-10 pb-6 sm:pb-10">
+                <div className="flex flex-col sm:flex-row gap-3 sm:items-center sm:justify-between">
+                  <p className="text-xs text-slate-400">
+                    Si no ves el contenido a las 7:00 p. m., actualiza la página.
+                  </p>
+                </div>
+              </div>
+          }
         </div>
       </div>
     </div>
@@ -69,7 +76,7 @@ function LockedState({ hours, minutes, seconds }) {
         <span className="text-2xl">🔒</span>
       </div>
       <h2 className="text-xl sm:text-2xl font-medium">Aún no es hora</h2>
-      <p className="mt-2 text-slate-400">El contenido se habilitará a las 5:00 p. m. de hoy.</p>
+      <p className="mt-2 text-slate-400">El contenido se habilitará a las 7:00 p. m. de hoy.</p>
       <div className="mt-6">
         <div className="inline-flex items-center gap-2 rounded-xl border border-slate-800 bg-slate-900/60 px-4 py-3 font-mono text-lg">
           <span>{hours}</span>
